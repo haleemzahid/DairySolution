@@ -1,0 +1,308 @@
+﻿<Page x:Class="DairySolution.Diary_Page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:DairySolution"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Diary_Page">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Background="#FAFAFA">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" Grid.Column="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <materialDesign:PackIcon Kind="PersonBox" Height="50" Width='50' Foreground="#CCCCCC" VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Vertical">
+                    <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="#777777">Shift Leader</TextBlock>
+                    <TextBlock FontSize="24" FontWeight="Regular" Foreground="#333333">Floyd F Collie</TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
+                    <TextBlock FontSize="14" FontWeight="Medium" Foreground="#999999" TextAlignment="Right">April 11, 2020</TextBlock>
+                    <TextBlock FontSize="14" FontWeight="Medium" Foreground="#999999" TextAlignment="Right">06:25 PM</TextBlock>
+                </StackPanel>
+
+                <TextBlock Grid.Column="0" Grid.Row="2" FontSize="14" FontWeight="SemiBold" Foreground="#777777" VerticalAlignment="Center">Event</TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="2" FontSize="16" FontWeight="Regular" Foreground="#333333">Property Check</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="4" FontSize="14" FontWeight="SemiBold" Foreground="#777777" VerticalAlignment="Center">Particulars</TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="4" FontSize="16" FontWeight="Regular" Foreground="#333333">Conducted By: Name Text</TextBlock>
+
+                <TextBlock Grid.Column="0" Grid.Row="6" FontSize="14" FontWeight="SemiBold" Foreground="#777777" VerticalAlignment="Center">Status</TextBlock>
+                <Border Grid.Column="2" Grid.Row="6" Background="#33FFAA00" HorizontalAlignment="Left" CornerRadius="15">
+                    <TextBlock FontSize="14" FontWeight="Bold" Foreground="#FFAA00" TextAlignment="Center" Margin="20 5">In Progress</TextBlock>
+                </Border>
+
+
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="700"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <materialDesign:Card Grid.Column="0" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" Foreground="#4CAF50" FontSize="24">630</TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Foreground="#373A3C" FontSize="14">In Stock</TextBlock>
+                            <materialDesign:PackIcon Kind="Rocket" Grid.Row="1" Grid.RowSpan="3" Grid.Column="3" Foreground="#4CAF50" Width="60" Height="60" VerticalAlignment="Center"/>
+                        </Grid>
+                    </materialDesign:Card>
+
+
+                    <materialDesign:Card Grid.Column="2" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" Foreground="#F44336" FontSize="24">610</TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Foreground="#373A3C" FontSize="14">Stock Out</TextBlock>
+                            <materialDesign:PackIcon Kind="NoEntry" Grid.Row="1" Grid.RowSpan="3" Grid.Column="3" Foreground="#F44336" Width="60" Height="60" VerticalAlignment="Center"/>
+                        </Grid>
+                    </materialDesign:Card>
+
+
+                    <materialDesign:Card Grid.Column="4" materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" Foreground="#00BCD4" FontSize="24">1240</TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Foreground="#373A3C" FontSize="14">Total</TextBlock>
+                            <materialDesign:PackIcon Kind="BarChart" Grid.Row="1" Grid.RowSpan="3" Grid.Column="3" Foreground="#00BCD4" Width="60" Height="60" VerticalAlignment="Center"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </Grid>
+
+                <Separator Grid.Row="1" VerticalAlignment="Center" Background="#E5E5E5"/>
+
+
+                <DataGrid x:Name="ManageProductsDG"
+                          Grid.Row="2"
+                          CanUserAddRows="False"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False">
+
+
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Padding" Value="18 10"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+
+                    <DataGrid.CellStyle>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                        <Grid Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.CellStyle>
+
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Padding" Value="15 5"/>
+                            <Setter Property="Background" Value="White"/>
+                            <!--<Setter Property="IsHitTestVisible" Value="False"/>-->
+
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#F5F5F5"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Name" Width="2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="http://wek.housepartyonline.com/userfiles/product/thumbnail/default.png" Width="80" Height="80" Margin="10"/>
+                                        <TextBlock Text="{Binding productName}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Qty" Width="1*" Binding="{Binding productQty}" TextBlock.LineHeight="90">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Code" Width="1*" Binding="{Binding productCode}">
+
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Category" Width="1*" Binding="{Binding productCategory}">
+
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Price" Width="1*" Binding="{Binding productPrice}">
+
+                        </DataGridTextColumn>
+                        <DataGridTemplateColumn Header="Settings" Width="1.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <WrapPanel Orientation="Horizontal">
+                                        <Button Margin="0 0 10 0">Edit</Button>
+                                        <materialDesign:PopupBox Margin="0 0 10 0">
+                                            <materialDesign:PopupBox.ToggleContent>
+                                                <Button>Pirnt</Button>
+                                            </materialDesign:PopupBox.ToggleContent>
+                                            <ListView>
+                                                <ListViewItem>BarCode</ListViewItem>
+                                                <ListViewItem>BarCode - Compact</ListViewItem>
+                                                <ListViewItem>Label</ListViewItem>
+                                                <ListViewItem>Label - Compact</ListViewItem>
+                                            </ListView>
+
+                                        </materialDesign:PopupBox>
+                                        <Button Style="{StaticResource MaterialDesignIconButton}">
+                                            <materialDesign:PackIcon Kind="Bin" Foreground="#DA4453"/>
+                                        </Button>
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </Grid>
+
+            <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" BorderBrush="#AAAAAA" BorderThickness="1" Padding='10 0 10 0'>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ComboBox Grid.Column="0" materialDesign:HintAssist.Hint="Even +"></ComboBox>
+
+                    <Border BorderBrush="#AAAAAA" BorderThickness="1 0 1 0" Grid.Column="1" Margin="10 0 10 0">
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+
+                            <materialDesign:PackIcon VerticalAlignment="Center" Grid.Column="1" Kind="PersonBox" Height="40" Width="40" Foreground="#AAAAAA"/>
+                            <TextBox VerticalAlignment="Center" x:Name="SearchTextBox" Background="Transparent" Grid.Column="2" materialDesign:TextFieldAssist.DecorationVisibility="Visible" Padding="5 0" BorderThickness="1" BorderBrush="#AAAAAA" materialDesign:HintAssist.Hint="Search">
+                            </TextBox>
+
+                            <Button Grid.Column="3" Style="{StaticResource MaterialDesignIconButton}" Padding="0" HorizontalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Paperclip"/>
+                            </Button>
+
+                            <Button Grid.Column="4">Post</Button>
+
+                        </Grid>
+                    </Border>
+
+                    <ComboBox Grid.Column="2" materialDesign:HintAssist.Hint="Status"></ComboBox>
+
+                </Grid>
+            </Border>
+
+
+
+        </Grid>
+    </ScrollViewer>
+</Page>
