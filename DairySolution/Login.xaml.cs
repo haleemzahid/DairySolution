@@ -26,6 +26,10 @@ namespace DairySolution
         }
         private async void LoginBtn_OnClick(object sender, RoutedEventArgs e)
         {
+            var mainWindow = new MainWindow();
+            mainWindow.ShowDialog();
+            this.Close();
+            return;
             var loginModel = new LoginModel()
             {
                 Email = EmailTxt.Text,
@@ -42,15 +46,14 @@ namespace DairySolution
                 }
                 else
                 {
-                    var mainWindow = new MainWindow();
+                    
                     var dp = SolvewareApiHelper.SiteUrl + contributor.ProfilePicture;
                     if (contributor.ProfilePicture != null)
                     {
                         mainWindow.DisplayPicture.Source = new BitmapImage(new Uri(dp, UriKind.Absolute));
 
                     }
-                    mainWindow.ShowDialog();
-                    this.Close();
+                   
 
                 }
 
