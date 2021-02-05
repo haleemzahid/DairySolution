@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DairySolution.Integrations.SolvewareAPI.Model;
+using DairySolution.Integrations.SolvewareAPI.Services;
 using MahApps.Metro.Controls;
 
 namespace DairySolution
@@ -19,13 +23,41 @@ namespace DairySolution
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : MetroWindow, INotifyPropertyChanged
+
     {
 
-        private List<DiaryTemplate> _DiaryTemplates;
 
 
-        public List<DiaryTemplate> DiaryTemplates
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+
+        public static Action<DiaryModel> selectedDiary;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        private ObservableCollection<DiaryTemplate> _DiaryTemplates;
+
+
+
+
+
+
+        public ObservableCollection<DiaryTemplate> DiaryTemplates
         {
             get
             {
@@ -34,16 +66,17 @@ namespace DairySolution
             set
             {
                 _DiaryTemplates = value;
-                //RaisePropertyChanged("Departments");
+                OnPropertyChanged("DiaryTemplates");
             }
         }
         public class DiaryType
         {
             public string DiaryTypeName { get; set; }
+            
         }
         public class DiaryTitle
         {
-
+            public DiaryModel dairyData { get; set; }
             public string DiaryName { get; set; }
         }
         public class DiaryItemTemplate
@@ -109,32 +142,43 @@ namespace DairySolution
         public MainWindow()
         {
             InitializeComponent();
+            selectedDiary += new Action<DiaryModel>(updateDiary);
             this.DataContext = this;
             mainFrame = MainContentFrame;
             mainFrame.Navigate(new Diary_Page());
-            DiaryTemplates = new List<DiaryTemplate>();
-            var dairy = new DiaryTemplate();
-            dairy.Name = "Diary";
+            DiaryTemplates = new ObservableCollection<DiaryTemplate>();
+            //var dairy = new DiaryTemplate();
+            //dairy.Name = "Diary";
 
-            DiaryItemTemplate di = new DiaryItemTemplate();
-            di.DiaryTitle.DiaryName = "DiaryOne";
-            var dtype = new List<DiaryType>();
-            dtype.Add(new DiaryType { DiaryTypeName="Hand on Diary" });
-            dtype.Add(new DiaryType { DiaryTypeName = "Take Over Diary" });
-            di.DiaryType = dtype;
-            dairy.AllDiaries.Add(di);
+            //DiaryItemTemplate di = new DiaryItemTemplate();
+            //di.DiaryTitle.DiaryName = "DiaryOne";
+            //var dtype = new List<DiaryType>();
+            //dtype.Add(new DiaryType { DiaryTypeName="Hand on Diary" });
+            //dtype.Add(new DiaryType { DiaryTypeName = "Take Over Diary" });
+            //di.DiaryType = dtype;
+            //dairy.AllDiaries.Add(di);
 
-             di = new DiaryItemTemplate();
-            di.DiaryTitle.DiaryName = "Diarytwo";
-             dtype = new List<DiaryType>();
-            dtype.Add(new DiaryType { DiaryTypeName = "Hand on Diary" });
-            dtype.Add(new DiaryType { DiaryTypeName = "Take Over Diary" });
-            di.DiaryType = dtype;
-            dairy.AllDiaries.Add(di);
+            // di = new DiaryItemTemplate();
+            //di.DiaryTitle.DiaryName = "Diarytwo";
+            // dtype = new List<DiaryType>();
+            //dtype.Add(new DiaryType { DiaryTypeName = "Hand on Diary" });
+            //dtype.Add(new DiaryType { DiaryTypeName = "Take Over Diary" });
+            //di.DiaryType = dtype;
+            //dairy.AllDiaries.Add(di);
 
-            DiaryTemplates.Add(dairy);
+            //DiaryTemplates.Add(dairy);
+            LoadTree += new Action<DiaryModel>(updateTree);
 
+        }
 
+        private async void updateTree(DiaryModel model)
+        {
+           await LoadTreeData();
+        }
+
+        private void updateDiary(DiaryModel obj)
+        {
+            
         }
 
         private void SubMenu1Radio_Unchecked(object sender, RoutedEventArgs e)
@@ -169,22 +213,71 @@ namespace DairySolution
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            mainFrame.Navigate(new Diary());
+            
         }
 
         private void MainTreeView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            
+            mainFrame.Navigate(new Diary());
+            //selectedDiary(new DiaryModel());
         }
-
+        public static Action<DiaryModel> LoadTree;
         private void DiaryName_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            var data = sender as dynamic;
+            mainFrame.Navigate(new Diary());
+            var dataContext = data.DataContext as DiaryItemTemplate;
 
+            selectedDiary(dataContext.DiaryTitle.dairyData);
         }
 
         private void DiaryTypes(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private async void loaded(object sender, RoutedEventArgs e)
+        {
+            await LoadTreeData();
+        }
+
+        private async Task LoadTreeData()
+        {
+            var dairy = new DiaryTemplate();
+            dairy.Name = "Diary";
+            int counter = 1;
+            if (DiaryTemplates == null)
+            {
+                DiaryTemplates = new ObservableCollection<DiaryTemplate>();
+            }
+            else
+            {
+                DiaryTemplates.Clear();
+            }
+            var data = await new DiaryService().GetAllDiaryAsync();
+            foreach (var item in data)
+            {
+
+
+                DiaryItemTemplate di = new DiaryItemTemplate();
+                di.DiaryTitle.DiaryName = "Diary " + counter;
+                di.DiaryTitle.dairyData = item;
+                var dtype = new List<DiaryType>();
+                dtype.Add(new DiaryType { DiaryTypeName = "Hand on Diary" });
+                dtype.Add(new DiaryType { DiaryTypeName = "Take Over Diary" });
+                di.DiaryType = dtype;
+
+                dairy.AllDiaries.Add(di);
+                counter++;
+            }
+            DiaryTemplates.Add(dairy);
+            OnPropertyChanged("DiaryTemplates");
+        }
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            DiaryName_MouseDown(null,null);
         }
     }
 }

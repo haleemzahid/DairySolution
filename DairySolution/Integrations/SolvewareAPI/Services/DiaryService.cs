@@ -22,14 +22,14 @@ namespace DairySolution.Integrations.SolvewareAPI.Services
 
         }
 
-        public async Task<List<Diary>> GetAllDiaryAsync()
+        public async Task<List<DiaryModel>> GetAllDiaryAsync()
         {
             using var client = new HttpClient();
             var res= await client.GetAsync(SolvewareApiHelper.BaseUrl + "Diary/GetAllDiaries");
             using var content = res.Content;
             var data = await content.ReadAsStringAsync();
             
-            return JsonConvert.DeserializeObject<List<Diary>>(data);
+            return JsonConvert.DeserializeObject<List<DiaryModel>>(data);
 
         }
 

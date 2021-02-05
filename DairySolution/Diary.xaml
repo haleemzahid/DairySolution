@@ -37,7 +37,7 @@
                     
                     Foreground="Black"
                     Height="45" Width="45" 
-                    VerticalAlignment="Center"
+                    
                     Kind="User"/>
                     <StackPanel Grid.Column="1">
                         <Label
@@ -45,12 +45,12 @@
                     FontSize="10"
                     >Swift leader 1</Label>
                         <Label
-                    VerticalContentAlignment="Center"
+                    
                     HorizontalContentAlignment="Left"
                     FontSize="10"
                     Grid.Column="2">Floyd F  Colle</Label>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Margin="511,0,0,0">
+                    <StackPanel Grid.Column="4" HorizontalAlignment="Right">
                         <TextBlock
                    x:Name="date"
                     FontSize="10"
@@ -79,14 +79,14 @@
                         
                         
                         FontSize="15">Event</TextBlock>
-                    <TextBlock Grid.Column="1" Text="{Binding DiaryModel.Event,UpdateSourceTrigger=PropertyChanged}">
+                    <TextBlock Grid.Column="1" Text="{Binding SaveDiaryModel.Event,UpdateSourceTrigger=PropertyChanged}">
 
                     </TextBlock>
                     <TextBlock
                         Grid.Row="1"
                         
                         FontSize="15">Particulars</TextBlock>
-                    <TextBlock Grid.Row="1" Text="{Binding DiaryModel.Particulars,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"
+                    <TextBlock Grid.Row="1" Text="{Binding SaveDiaryModel.Particulars,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"
                        
                         FontSize="15"></TextBlock>
                     <TextBlock Grid.Row="2"
@@ -94,7 +94,7 @@
                         FontSize="15" >Status</TextBlock>
 
 
-                    <TextBlock Grid.Row="2" Text="{Binding DiaryModel.Status,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+                    <TextBlock Grid.Row="2" Text="{Binding SaveDiaryModel.Status,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
 
                 </Grid>
 
@@ -124,7 +124,7 @@
                     HorizontalAlignment="Left"
                     Kind="User">
                 </materialDesign:PackIcon>
-                <TextBox Grid.Column="2" Text="{Binding Particulars,UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="2" Text="{Binding DiaryModel.Particulars,UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Grid.Column="3" Margin="1 0 1 0" Click="Saved">Post</Button>
                 <ComboBox Grid.Column="4" Text="{Binding DiaryModel.Status,UpdateSourceTrigger=PropertyChanged}">
                     <ComboBoxItem>
