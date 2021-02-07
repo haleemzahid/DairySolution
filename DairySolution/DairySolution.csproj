@@ -17,6 +17,16 @@
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0-ci2312" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SloveWare.Entities">
+      <HintPath>..\..\..\SolveWare-master\SolveWare-master\SloveWare.Entities\bin\Debug\netcoreapp3.1\SloveWare.Entities.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

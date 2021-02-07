@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using DairySolution.Integrations.SolvewareAPI.Model;
 using DairySolution.Integrations.SolvewareAPI.Services;
 using MahApps.Metro.Controls;
+using SloveWare.Entities;
 
 namespace DairySolution
 {
@@ -39,17 +40,46 @@ namespace DairySolution
 
 
 
-        public static Action<DiaryModel> selectedDiary;
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        public static Action<tblDiary,bool> selectedDiary;
+
+
+
+
+
+       
+
+
+        private ObservableCollection<tblDiaryDetails> _AllPostedDiaries;
+
+        public ObservableCollection<tblDiaryDetails> AllPostedDiaries
+        {
+            get { return _AllPostedDiaries; }
+            set { _AllPostedDiaries = value; OnPropertyChanged("AllPostedDiaries"); }
+        }
+
+
+        private ObservableCollection<tblDiaryDetails> _SelectedPostedDiaries;
+
+        public ObservableCollection<tblDiaryDetails> SelectedPostedDiaries
+        {
+            get { return _SelectedPostedDiaries; }
+            set { _SelectedPostedDiaries = value; OnPropertyChanged("SelectedPostedDiaries"); }
+        }
+
+
+
+
+        private tblDiary _SelectedDiary;
+
+        public tblDiary SelectedDiary
+        {
+            get { return _SelectedDiary; }
+            set { _SelectedDiary = value; OnPropertyChanged("_SelectedDiary"); }
+        }
+
+
+
+
         private ObservableCollection<DiaryTemplate> _DiaryTemplates;
 
 
@@ -72,11 +102,11 @@ namespace DairySolution
         public class DiaryType
         {
             public string DiaryTypeName { get; set; }
-            
+            public tblDiary dairyData { get; set; }
         }
         public class DiaryTitle
         {
-            public DiaryModel dairyData { get; set; }
+            public tblDiary dairyData { get; set; }
             public string DiaryName { get; set; }
         }
         public class DiaryItemTemplate
@@ -142,14 +172,14 @@ namespace DairySolution
         public MainWindow()
         {
             InitializeComponent();
-            selectedDiary += new Action<DiaryModel>(updateDiary);
+            selectedDiary += new Action<tblDiary,bool>(updateDiary);
             this.DataContext = this;
             mainFrame = MainContentFrame;
             mainFrame.Navigate(new Diary_Page());
             DiaryTemplates = new ObservableCollection<DiaryTemplate>();
             //var dairy = new DiaryTemplate();
             //dairy.Name = "Diary";
-
+            
             //DiaryItemTemplate di = new DiaryItemTemplate();
             //di.DiaryTitle.DiaryName = "DiaryOne";
             //var dtype = new List<DiaryType>();
@@ -167,16 +197,16 @@ namespace DairySolution
             //dairy.AllDiaries.Add(di);
 
             //DiaryTemplates.Add(dairy);
-            LoadTree += new Action<DiaryModel>(updateTree);
+            LoadTree += new Action<tblDiaryDetails>(updateTree);
 
         }
 
-        private async void updateTree(DiaryModel model)
+        private async void updateTree(tblDiaryDetails model)
         {
            await LoadTreeData();
         }
 
-        private void updateDiary(DiaryModel obj)
+        private void updateDiary(tblDiary obj,bool ishandson)
         {
             
         }
@@ -215,25 +245,34 @@ namespace DairySolution
         {
             
         }
-
+        
         private void MainTreeView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             
             mainFrame.Navigate(new Diary());
             //selectedDiary(new DiaryModel());
         }
-        public static Action<DiaryModel> LoadTree;
+        public static Action<tblDiaryDetails> LoadTree;
         private void DiaryName_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var data = sender as dynamic;
             mainFrame.Navigate(new Diary());
             var dataContext = data.DataContext as DiaryItemTemplate;
-
-            selectedDiary(dataContext.DiaryTitle.dairyData);
+           
+            selectedDiary(dataContext.DiaryTitle.dairyData,false);
         }
 
         private void DiaryTypes(object sender, MouseButtonEventArgs e)
         {
+            var data = sender as dynamic;
+            mainFrame.Navigate(new Diary());
+            var dataContext = data.DataContext as DiaryType;
+            bool ishands = false;
+            if (dataContext.DiaryTypeName== "Hand on Diary")
+            {
+                ishands = true;
+            }
+            selectedDiary(dataContext.dairyData, ishands);
 
         }
 
@@ -241,7 +280,7 @@ namespace DairySolution
         {
             await LoadTreeData();
         }
-
+        #region Api Calling Region
         private async Task LoadTreeData()
         {
             var dairy = new DiaryTemplate();
@@ -261,11 +300,11 @@ namespace DairySolution
 
 
                 DiaryItemTemplate di = new DiaryItemTemplate();
-                di.DiaryTitle.DiaryName = "Diary " + counter;
+                di.DiaryTitle.DiaryName =item.Name;
                 di.DiaryTitle.dairyData = item;
                 var dtype = new List<DiaryType>();
-                dtype.Add(new DiaryType { DiaryTypeName = "Hand on Diary" });
-                dtype.Add(new DiaryType { DiaryTypeName = "Take Over Diary" });
+                dtype.Add(new DiaryType { DiaryTypeName = "Hand on Diary", dairyData=item });
+                dtype.Add(new DiaryType { DiaryTypeName = "Take Over Diary", dairyData = item });
                 di.DiaryType = dtype;
 
                 dairy.AllDiaries.Add(di);
@@ -275,9 +314,13 @@ namespace DairySolution
             OnPropertyChanged("DiaryTemplates");
         }
 
+       
+
+
+        #endregion
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            DiaryName_MouseDown(null,null);
+            
         }
     }
 }

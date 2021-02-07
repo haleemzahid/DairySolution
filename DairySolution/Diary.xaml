@@ -4,11 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      xmlns:local="clr-namespace:DairySolution"
+      xmlns:local="clr-namespace:DairySolution" Loaded="UserControl_Loaded"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
+      d:DesignHeight="450" d:DesignWidth="800" HorizontalAlignment="Stretch">
     <Grid Background="White">
-        <Grid Background="White" Margin="10">
+        <Grid Background="White" Margin="10" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
@@ -19,122 +19,96 @@
             HorizontalContentAlignment="Center"
             FontSize="50"
             Content="Control Room Diary"/>
+
+
             <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.3*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid>
-                    <Grid.ColumnDefinitions>
+            <ListBox HorizontalAlignment="Stretch" Grid.Row="1"  ItemsSource="{Binding AllPostedDiaries,UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch" Width="1000">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                </Grid.ColumnDefinitions>
 
-                        <ColumnDefinition Width="15*"/>
-                        <ColumnDefinition Width="148*"/>
-                        <ColumnDefinition Width="32*"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <materialDesign:PackIcon Kind="PersonBox" Height="50" Width='50' Foreground="#CCCCCC" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Vertical">
+                                <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="#777777">Shift Leader</TextBlock>
+                                <TextBlock FontSize="24" FontWeight="Regular" Foreground="#333333">Floyd F Collie</TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right">
+                                <TextBlock Name="date" FontSize="14" FontWeight="Medium" Foreground="#999999" TextAlignment="Right" Text="{Binding Date,UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock  Name="time" FontSize="14" FontWeight="Medium" Foreground="#999999" TextAlignment="Right" Text="{Binding Time,UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="0" Grid.Row="2" FontSize="14" FontWeight="SemiBold" Foreground="#777777" VerticalAlignment="Center">Event</TextBlock>
+                            <TextBlock Grid.Column="2" Grid.Row="2" FontSize="16" Text="{Binding EventName,UpdateSourceTrigger=PropertyChanged}" FontWeight="Regular" Foreground="#333333"/>
+                            <TextBlock Grid.Column="0" Grid.Row="4" FontSize="14" FontWeight="SemiBold" Foreground="#777777" VerticalAlignment="Center">Particulars</TextBlock>
+                            <TextBlock Grid.Column="2" Grid.Row="4" FontSize="16" FontWeight="Regular" Text="{Binding Particulars,UpdateSourceTrigger=PropertyChanged}" Foreground="#333333"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="6" FontSize="14" FontWeight="SemiBold" Foreground="#777777" VerticalAlignment="Center">Status</TextBlock>
+                            <Border Grid.Column="2" Grid.Row="6" Background="#33FFAA00" HorizontalAlignment="Left" CornerRadius="15">
+                                <TextBlock FontSize="14" FontWeight="Bold" Foreground="#FFAA00" TextAlignment="Center" Margin="20 5" Text="{Binding StatusName,UpdateSourceTrigger=PropertyChanged}" />
+                            </Border>
+
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            </Grid>
+
+            <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" BorderBrush="#AAAAAA" BorderThickness="1" Padding='10 0 10 0'>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
 
-                    <materialDesign:PackIcon 
-                    
-                    Foreground="Black"
-                    Height="45" Width="45" 
-                    
-                    Kind="User"/>
-                    <StackPanel Grid.Column="1">
-                        <Label
-                    
-                    FontSize="10"
-                    >Swift leader 1</Label>
-                        <Label
-                    
-                    HorizontalContentAlignment="Left"
-                    FontSize="10"
-                    Grid.Column="2">Floyd F  Colle</Label>
-                    </StackPanel>
-                    <StackPanel Grid.Column="4" HorizontalAlignment="Right">
-                        <TextBlock
-                   x:Name="date"
-                    FontSize="10"
-                    Grid.Column="4">
+                    <ComboBox Grid.Column="0" ItemsSource="{Binding Events,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding DiaryModel.tblEventId,UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Even +"></ComboBox>
 
-                        </TextBlock>
-                        <TextBlock Name="time"
-                    FontSize="10">
+                    <Border BorderBrush="#AAAAAA" BorderThickness="1 0 1 0" Grid.Column="1" Margin="10 0 10 0">
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
 
-                        </TextBlock>
-                    </StackPanel>
-                </Grid>
-                <Grid Margin="20" Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="0.2*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="4*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        
-                        
-                        FontSize="15">Event</TextBlock>
-                    <TextBlock Grid.Column="1" Text="{Binding SaveDiaryModel.Event,UpdateSourceTrigger=PropertyChanged}">
+                            <materialDesign:PackIcon VerticalAlignment="Center" Grid.Column="1" Kind="PersonBox" Height="40" Width="40" Foreground="#AAAAAA"/>
+                            <TextBox VerticalAlignment="Center" x:Name="SearchTextBox" Text="{Binding DiaryModel.Particulars,UpdateSourceTrigger=PropertyChanged}" Background="Transparent" Grid.Column="2" materialDesign:TextFieldAssist.DecorationVisibility="Visible" Padding="5 0" BorderThickness="1" BorderBrush="#AAAAAA" >
+                            </TextBox>
 
-                    </TextBlock>
-                    <TextBlock
-                        Grid.Row="1"
-                        
-                        FontSize="15">Particulars</TextBlock>
-                    <TextBlock Grid.Row="1" Text="{Binding SaveDiaryModel.Particulars,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"
-                       
-                        FontSize="15"></TextBlock>
-                    <TextBlock Grid.Row="2"
-                       
-                        FontSize="15" >Status</TextBlock>
+                            <Button Grid.Column="3" Style="{StaticResource MaterialDesignIconButton}" Padding="0" HorizontalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Paperclip"/>
+                            </Button>
 
+                            <Button Grid.Column="4" Click="Saved">Post</Button>
 
-                    <TextBlock Grid.Row="2" Text="{Binding SaveDiaryModel.Status,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+                        </Grid>
+                    </Border>
+
+                    <ComboBox ItemsSource="{Binding Statuses,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding DiaryModel.tblStatusId,UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" materialDesign:HintAssist.Hint="Status"></ComboBox>
 
                 </Grid>
-
-            </Grid>
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="0.17*"/>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width=".3*"/>
-                    <ColumnDefinition />
-
-                </Grid.ColumnDefinitions>
-                <ComboBox Text="{Binding DiaryModel.Event,UpdateSourceTrigger=PropertyChanged}">
-                    <ComboBoxItem>
-                        <Label>Event</Label>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <Label>More.....</Label>
-                    </ComboBoxItem>
-                </ComboBox>
-                <materialDesign:PackIcon 
-                    Grid.Column="1"
-                    Foreground="Black"
-                    Height="40" Width="40" 
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
-                    Kind="User">
-                </materialDesign:PackIcon>
-                <TextBox Grid.Column="2" Text="{Binding DiaryModel.Particulars,UpdateSourceTrigger=PropertyChanged}"/>
-                <Button Grid.Column="3" Margin="1 0 1 0" Click="Saved">Post</Button>
-                <ComboBox Grid.Column="4" Text="{Binding DiaryModel.Status,UpdateSourceTrigger=PropertyChanged}">
-                    <ComboBoxItem>
-                        Incomplete
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        In Progress
-                    </ComboBoxItem>
-                </ComboBox>
-            </Grid>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

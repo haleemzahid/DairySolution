@@ -159,7 +159,7 @@
 
 
             <!--SIDE BAR-->
-            <Grid Grid.Column="0" Grid.Row="1" Width="220
+            <Grid Grid.Column="0" Grid.Row="1" Width="240
                   " Background="{StaticResource PrimaryHueMidBrush}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10"/>
@@ -571,7 +571,8 @@
 
 
                 <Grid Grid.Row="4" MouseDown="Grid_MouseDown" Grid.ColumnSpan="3" >
-                    <TreeView  Foreground="White" Margin="-6,0,0,0" 
+                    <TreeView  Foreground="White" Margin="10,0,0,0" 
+                                               
                                               MouseDoubleClick="MainTreeView_MouseLeftButtonUp"
                                               ItemsSource="{Binding DiaryTemplates,UpdateSourceTrigger=PropertyChanged}"
                                               VerticalContentAlignment="Stretch"
@@ -592,22 +593,19 @@
                                 <HierarchicalDataTemplate.ItemTemplate>
                                     <HierarchicalDataTemplate ItemsSource="{Binding DiaryType}">
                                         <StackPanel Orientation="Horizontal"
-                                                                    x:Name="serverName"
-                                                                    MouseDown="DiaryName_MouseDown"
-                                                                    Tag="{Binding}">
+                                                                    x:Name="serverName">
                                             <materialDesign:PackIcon  Foreground="White" Height="30" Width="30" Kind="Notebook">
                                             </materialDesign:PackIcon>
                                             <Label FontSize="16" Foreground="White" Content="{Binding DiaryTitle.DiaryName}" />
                                         </StackPanel>
                                         <HierarchicalDataTemplate.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel Orientation="Horizontal"
+                                                <StackPanel Orientation="Horizontal" Tag="{Binding}"
                                                                             x:Name="serverCameraList"
-                                                                            MouseDown="DiaryTypes"
-                                                                            Tag="{Binding}">
+                                                                            MouseDown="DiaryTypes">
                                                     <materialDesign:PackIcon  Foreground="White" Height="30" Width="30" Kind="Notebook">
                                                     </materialDesign:PackIcon>
-                                                    <Label FontSize="16" Foreground="White" Content="{Binding DiaryTypeName}" />
+                                                    <Label FontSize="16" Foreground="White"  Content="{Binding DiaryTypeName}" />
                                                 </StackPanel>
                                             </DataTemplate>
                                         </HierarchicalDataTemplate.ItemTemplate>
