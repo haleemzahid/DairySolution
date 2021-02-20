@@ -16,7 +16,7 @@ namespace DairySolution.Integrations.SolvewareAPI.Services
         public async Task<List<tblEvent>> GetAllEvent()
         {
             using var client = new HttpClient();
-            var res = await client.GetAsync(SolvewareApiHelper.BaseUrl + "Event/GetAllEvent");
+            var res = await client.PostAsJsonAsync(SolvewareApiHelper.BaseUrl + "Event/GetAllEvent", Helper.LoginHelper.GetFilterModel());
             using var content = res.Content;
             var data = await content.ReadAsStringAsync();
 

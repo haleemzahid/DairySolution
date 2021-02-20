@@ -3,12 +3,13 @@ using System.Threading.Tasks;
 using DairySolution.Integrations.SolvewareAPI;
 using Newtonsoft.Json;
 using DairySolution.Integrations.SolvewareAPI.Model;
+using SloveWare.Entities;
 
 namespace DairySolution.Integrations.SolvewareAPI.Services
 {
     internal class AccountService
     {
-        public static async Task<Contributor> Login(LoginModel model)
+        public static async Task<tblContributor> Login(LoginModel model)
         {
             using var client = new HttpClient();
             
@@ -16,7 +17,7 @@ namespace DairySolution.Integrations.SolvewareAPI.Services
             if (!res.IsSuccessStatusCode) return null;
             using var content = res.Content;
             var data = await content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<Contributor>(data);
+            return JsonConvert.DeserializeObject<tblContributor>(data);
         }
     }
 }

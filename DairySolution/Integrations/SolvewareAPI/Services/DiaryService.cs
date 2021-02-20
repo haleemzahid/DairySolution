@@ -1,6 +1,7 @@
 ﻿using DairySolution.Integrations.SolvewareAPI.Model;
 using Newtonsoft.Json;
 using SloveWare.Entities;
+using SloveWare.Entities.DTOModel;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -33,9 +34,11 @@ namespace DairySolution.Integrations.SolvewareAPI.Services
 
         }
         public async Task<List<tblDiary>> GetAllDiaryAsync()
+
         {
+           
             using var client = new HttpClient();
-            var res= await client.GetAsync(SolvewareApiHelper.BaseUrl + "Diary/GetAllDiaries");
+            var res= await client.PostAsJsonAsync(SolvewareApiHelper.BaseUrl + "Diary/GetAllDiaries",Helper.LoginHelper.GetFilterModel());
             using var content = res.Content;
             var data = await content.ReadAsStringAsync();
             

@@ -13,7 +13,7 @@ namespace DairySolution.Integrations.SolvewareAPI.Services
         public async Task<List<tblStatus>> GetAllStatusAsync()
         {
             using var client = new HttpClient();
-            var res = await client.GetAsync(SolvewareApiHelper.BaseUrl + "Status/GetAllStatus");
+            var res = await client.PostAsJsonAsync(SolvewareApiHelper.BaseUrl + "Status/GetAllStatus", Helper.LoginHelper.GetFilterModel());
             using var content = res.Content;
             var data = await content.ReadAsStringAsync();
 

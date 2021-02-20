@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DairySolution.Helper;
 using DairySolution.Integrations.SolvewareAPI;
 using DairySolution.Integrations.SolvewareAPI.Model;
 using DairySolution.Integrations.SolvewareAPI.Services;
@@ -54,8 +55,8 @@ namespace DairySolution
                         mainWindow.DisplayPicture.Source = new BitmapImage(new Uri(dp, UriKind.Absolute));
 
                     }
-                   
 
+                    LoginHelper.loginData = contributor;
                 }
 
             }
