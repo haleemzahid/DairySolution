@@ -49,14 +49,16 @@ namespace DairySolution
                 {
                     
                     var dp = SolvewareApiHelper.SiteUrl + contributor.ProfilePicture;
-                    mainWindow.ShowDialog();
+                    LoginHelper.loginData = contributor;
+                   
                     if (contributor.ProfilePicture != null)
                     {
                         mainWindow.DisplayPicture.Source = new BitmapImage(new Uri(dp, UriKind.Absolute));
 
                     }
+                    mainWindow.Show();
+                    this.Close();
 
-                    LoginHelper.loginData = contributor;
                 }
 
             }

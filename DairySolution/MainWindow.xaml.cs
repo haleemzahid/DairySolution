@@ -198,6 +198,7 @@ namespace DairySolution
 
             //DiaryTemplates.Add(dairy);
             LoadTree += new Action<tblDiaryDetails>(updateTree);
+           
 
         }
 
@@ -249,7 +250,7 @@ namespace DairySolution
         private void MainTreeView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             
-            mainFrame.Navigate(new Diary());
+          //  mainFrame.Navigate(new Diary());
             //selectedDiary(new DiaryModel());
         }
         public static Action<tblDiaryDetails> LoadTree;
@@ -279,6 +280,7 @@ namespace DairySolution
         private async void loaded(object sender, RoutedEventArgs e)
         {
             await LoadTreeData();
+            username.Text = Helper.LoginHelper.loginData.FirstName + " " + Helper.LoginHelper.loginData.LastName;
         }
         #region Api Calling Region
         private async Task LoadTreeData()
@@ -295,6 +297,9 @@ namespace DairySolution
                 DiaryTemplates.Clear();
             }
             var data = await new DiaryService().GetAllDiaryAsync();
+
+            if (data == null) return;
+            
             foreach (var item in data)
             {
 
@@ -321,6 +326,13 @@ namespace DairySolution
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             
+        }
+
+        private void logout(object sender, RoutedEventArgs e)
+        {
+            Login l = new Login();
+            l.Show();
+            this.Close();
         }
     }
 }

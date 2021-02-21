@@ -23,10 +23,10 @@ namespace DairySolution.Integrations.SolvewareAPI.Services
             return true;
 
         }
-        public async Task<List<tblDiaryDetails>> GetAllPostedDiaryAsync()
+        public async Task<List<tblDiaryDetails>> GetAllPostedDiaryAsync(tblDiary diary)
         {
             using var client = new HttpClient();
-            var res = await client.GetAsync(SolvewareApiHelper.BaseUrl + "Diary/GetAllPostedDiaries");
+            var res = await client.PostAsJsonAsync(SolvewareApiHelper.BaseUrl + "Diary/GetAllPostedDiaries", diary);
             using var content = res.Content;
             var data = await content.ReadAsStringAsync();
 
@@ -38,7 +38,7 @@ namespace DairySolution.Integrations.SolvewareAPI.Services
         {
            
             using var client = new HttpClient();
-            var res= await client.PostAsJsonAsync(SolvewareApiHelper.BaseUrl + "Diary/GetAllDiaries",Helper.LoginHelper.GetFilterModel());
+            var res= await client.PostAsJsonAsync(SolvewareApiHelper.BaseUrl + "Diary/GetAllDiaries", Helper.LoginHelper.GetFilterModel());
             using var content = res.Content;
             var data = await content.ReadAsStringAsync();
             

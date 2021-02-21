@@ -70,16 +70,19 @@ namespace DairySolution
         {
 
             var events = await new EventService().GetAllEvent();
-
-            Events = new ObservableCollection<tblEvent>(events);
-
+            if (events!=null) {
+                Events = new ObservableCollection<tblEvent>(events);
+            }
 
         }
 
-        private async Task<ObservableCollection<tblDiaryDetails>> GetAllPostedDiaries()
+        private async Task<ObservableCollection<tblDiaryDetails>> GetAllPostedDiaries(tblDiary diary)
         {
 
-            var events = await new DiaryService().GetAllPostedDiaryAsync();
+            var events = await new DiaryService().GetAllPostedDiaryAsync(diary);
+
+            if (events == null) return null;
+            
 
             return new ObservableCollection<tblDiaryDetails>(events);
 
@@ -93,6 +96,9 @@ namespace DairySolution
         {
 
             var status = await new StatusService().GetAllStatusAsync();
+
+
+            if (status == null) return;
 
             Statuses = new ObservableCollection<tblStatus>(status);
 
@@ -140,7 +146,7 @@ namespace DairySolution
 
             await LoadEvent();
             await LoadStatus();
-            var pd=await GetAllPostedDiaries();
+            var pd=await GetAllPostedDiaries(obj);
             if (pd != null)
                 if (pd.Count > 0 && pd.Any(x => x.tblDiaryId == obj.Id && x.IsHandsOn==ishandson))
                 {
