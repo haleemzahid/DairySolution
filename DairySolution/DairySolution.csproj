@@ -23,6 +23,7 @@
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <ApplicationIcon>Diary.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SloveWare.Entities">

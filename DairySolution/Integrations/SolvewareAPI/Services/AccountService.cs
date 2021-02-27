@@ -12,8 +12,7 @@ namespace DairySolution.Integrations.SolvewareAPI.Services
         public static async Task<tblContributor> Login(LoginModel model)
         {
             using var client = new HttpClient();
-            
-            using var res = await client.PostAsJsonAsync(SolvewareApiHelper.BaseUrl + "account/login", model);
+            using var res = await client.PostAsJsonAsync(SolvewareApiHelper.BaseUrl + "Account/Login", model);
             if (!res.IsSuccessStatusCode) return null;
             using var content = res.Content;
             var data = await content.ReadAsStringAsync();

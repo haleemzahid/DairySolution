@@ -18,7 +18,7 @@ namespace DairySolution.Helper
             if (loginData == null) return new DataFilerModel();
             else
             {
-                return (new DataFilerModel { UserId = (int)loginData.UserId, ProductId = (int)loginData.SubscribedProductId });
+                return (new DataFilerModel { UserId = (int)loginData.UserId, ProductId = (int)loginData.tblUserSubscribedProduct.ProductId });
             }
         }
 
